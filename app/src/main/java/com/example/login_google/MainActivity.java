@@ -11,6 +11,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,7 +25,7 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    ImageButton btn_google;
+    SignInButton signInButton;
     FirebaseAuth auth;
     FirebaseDatabase database;
     GoogleSignInClient gsic;
@@ -35,7 +36,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btn_google = findViewById(R.id.btn_google);
+        signInButton = findViewById(R.id.sign_in_button);
+        signInButton.setSize(SignInButton.SIZE_STANDARD);
 
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         gsic = GoogleSignIn.getClient(this, gso);
 
         // Botão de Login com Google
-        btn_google.setOnClickListener(new View.OnClickListener() {
+        signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 googleSignIn();
